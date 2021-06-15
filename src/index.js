@@ -1,5 +1,3 @@
-const handlers = require('./handlers')
-const cmd = require('./commands')
-const utils = require('./utils')
-
-module.exports = { cmd, handlers, utils }
+export * as handlers from './handlers';
+export * as cmd from './commands';
+export * as utils from './utils';

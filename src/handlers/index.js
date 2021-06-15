@@ -1,6 +1,4 @@
-const easterEggHandler = require('./easterEggHandler')
-const joinedLeftUserHandler = require('./joinedLeftUserHandler')
-const textHandler = require('./textHandler')
-const callbackHandler = require('./callbackHandler')
-
-module.exports = { easterEggHandler, joinedLeftUserHandler, textHandler, callbackHandler }
+export * as easterEggHandler from './easterEggHandler';
+export * as joinedLeftUserHandler from './joinedLeftUserHandler';
+export * as textHandler from './textHandler';
+export * as callbackHandler from './callbackHandler';

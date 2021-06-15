@@ -1,9 +1,11 @@
-const { unbanCommand } = require('../commands')
+import { unbanCommand } from '../commands';
 
-module.exports = async function (ctx) {
-  const matchedData = ctx.callbackQuery.data.match(/^(?<type>.+): (?<data>.+)$/).groups
-  if (matchedData && matchedData.type === 'unban') {
-    await unbanCommand(ctx, matchedData.data)
-    await ctx.answerCbQuery()
-  }
-}
+const queriesList = {
+  unban: unbanCommand,
+};
+
+export default async (ctx) => {
+  const matchedData = ctx.callbackQuery.data.match(/^(?<type>.+): (?<data>.+)$/).groups;
+  await queriesList[matchedData.type](ctx, matchedData.data);
+  await ctx.answerCbQuery();
+};

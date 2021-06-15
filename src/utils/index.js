@@ -1,6 +1,4 @@
-const apiAuth = require('./apiAuth')
-const errorMessage = require('./errorMessage')
-const forAdmins = require('./forAdmins')
-const log = require('./log')
-
-module.exports = { apiAuth, errorMessage, forAdmins, log }
+export * as apiAuth from './apiAuth';
+export * as errorMessage from './errorMessage';
+export * as forAdmins from './forAdmins';
+export * as log from './log';

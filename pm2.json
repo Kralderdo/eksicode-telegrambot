@@ -2,13 +2,13 @@
   "apps": [
     {
       "name": "eksicodeBot-user",
-      "script": "telegram.js",
+      "script": "telegramCount.js",
       "instances": 1,
       "restart_delay": 43200000
     },
     {
       "name": "eksicodeBot-func",
-      "script": "telegram_func.js",
+      "script": "telegramBot.js",
       "ignore_watch": [
         "logs",
         "node_modules"

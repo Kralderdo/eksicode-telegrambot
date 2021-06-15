@@ -1,23 +1,23 @@
-const axios = require('axios')
+import fetch from 'node-fetch';
 
-async function apiAuth () {
+async function apiAuth() {
   try {
-    const res = await axios.post(`${process.env.API_URL}/auth/local`, {
-      identifier: process.env.API_USER,
-      password: process.env.API_PASS
-    }, {
+    const auth = await fetch(`${process.env.API_URL}/auth/local`, {
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        identifier: process.env.API_USER,
+        password: process.env.API_PASS,
+      }),
+    });
 
-    const data = res.data
-
-    return data.jwt
+    return await auth.json().jwt;
   } catch (err) {
-    console.log('API Yetkilendirmesi esnasında bir hata oluştu.')
-    console.error(err)
+    console.log('API Yetkilendirmesi esnasında bir hata oluştu.');
+    console.error(err);
+    return 0;
   }
 }
 
-module.exports = apiAuth
+export default apiAuth;
