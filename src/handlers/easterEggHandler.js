@@ -1,17 +1,4 @@
-const clean = (piece) => (piece
-    .replace(/((^|\n)(?:[^\/\\]|\/[^*\/]|\\.)*?)\s*\/\*(?:[^*]|\*[^\/])*(\*\/|)/g, '$1')
-    .replace(/((^|\n)(?:[^\/\\]|\/[^\/]|\\.)*?)\s*\/\/[^\n]*/g, '$1')
-    .replace(/\n\s*/g, '')
-);
-
-const regex = ({raw}, ...interpolations) => (
-    new RegExp(interpolations.reduce(
-        (regex, insert, index) => (regex + insert + clean(raw[index + 1])),
-        clean(raw[0])
-    ), "gmi")
-);
-
-// Move above to a utils.js or something
+import regex from '../utils/regexUtils';
 
 const boomerRegex = regex`
 (B|ß)
@@ -20,33 +7,31 @@ const boomerRegex = regex`
 (ğ)*
 (e|é|è|ė|ê|ë|ě|ĕ|ē|ẽ|e|ẹ|ı|i|í|ì|i|î|ï|ǐ|ĭ|ī|ĩ|ị)+
 (r)
-`
+`;
 
-const jsSartmiRegex = regex`(js [sş]art m[ıi])`
+const jsSartmiRegex = regex`(js [sş]art m[ıi])`;
 
-const iHaveAQuestionRegex = regex`bi(rşey|şey| şey|r şey|şiy| şiy|şi| şi|' şey|'şey) sor(ucam|acağım|acam|cam|ucağım|abilirmiyim|abilir miyim|ammı|am mı|ayım mı|ayımmı)`
+const iHaveAQuestionRegex = regex`
+bi(rşey|şey| şey|r şey|şiy| şiy|şi| şi|' şey|'şey) 
+sor(ucam|acağım|acam|cam|ucağım|abilirmiyim|abilir miyim|ammı|am mı|ayım mı|ayımmı)`;
 
-
-function jsSartMiHandler (ctx) {
-  const jsSartMiMatch = ctx.message.text.match(jsSartmiRegex)
-  const iHaveAQuestionMatch = ctx.message.text.match(iHaveAQuestionRegex)
-  const boomerMatch = ctx.message.text.match(boomerRegex)
+function jsSartMiHandler(ctx) {
+  const jsSartMiMatch = ctx.message.text.match(jsSartmiRegex);
+  const iHaveAQuestionMatch = ctx.message.text.match(iHaveAQuestionRegex);
+  const boomerMatch = ctx.message.text.match(boomerRegex);
   // switch-case?
   try {
     if (jsSartMiMatch) {
-      const randomNum = Math.floor(Math.random() * 1000)
-      if (randomNum > 995) {
-        ctx.reply('Değil.')
-      } else {
-        ctx.reply('Şart.')
-      }
+      const randomNum = Math.floor(Math.random() * 1000);
+      ctx.reply(randomNum > 995 ? 'Değil.' : 'Şart.');
     } else if (iHaveAQuestionMatch) {
-      ctx.reply('Haydi, sor sor!')
+      ctx.reply('Haydi, sor sor!');
     } else if (boomerMatch) {
-      ctx.reply('Boomer babandır...')
+      ctx.reply('Boomer babandır...');
     }
   } catch (err) {
-    console.log('unexpected error at easter egg handler.')
-  }}
+    console.error(err);
+  }
+}
 
-module.exports = jsSartMiHandler
+export default jsSartMiHandler;
