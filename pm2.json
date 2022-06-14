@@ -15,13 +15,14 @@
       ],
       "watch": true,
       "instances": 1
-    },
-    {
-      "name": "kaynaklar-kontrol",
-      "script": "kaynaklar_kontrol.js",
+    },{
+      "name": "sourcess_controller",
+      "script": "sourcess_controller.js",
+      "listen_timeout": 5000,
+      "watch": false,
       "instances": 1,
-      "restart_delay": 172800000,
-      "kill_timeout": 600000
-    }
+      "wait_ready": true,
+      "restart_delay": 5000
+  }
   ]
 }
