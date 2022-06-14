@@ -4,7 +4,7 @@ require('dotenv').config({
   path: path.join(__dirname, '.env')
 })
 
-const Telegraf = require('telegraf')
+const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const { cmd, utils, handlers } = require('./src')
